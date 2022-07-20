@@ -15,7 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //change expiration
+        $schedule->command('user:expiration')->everyMinute();
+
+        //send mails
+        $schedule->command('user:notify')->everyMinute();
+
     }
 
     /**

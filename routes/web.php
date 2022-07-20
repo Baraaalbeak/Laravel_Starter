@@ -3,9 +3,10 @@
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\SecondController;
 use App\Http\Controllers\Front\UserController;
+use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,20 @@ use Illuminate\Support\Facades\Auth;
 //    route::get('/',[UserController::class,'getindex']);
 //});
 
+///
+//Localization
+Route::get('offers/locale/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+
+//get the same language on session
+App::setLocale($locale);
+session()->put('locale', $locale);
+return back();
+});
+///
+
 Auth::routes(['verify'=>true]);
 
 route::get('/',[UserController::class,'getindex']);
@@ -57,6 +72,7 @@ Route::get('/welcome', function ()
     return "welcome";
 });
 
+Route::get('fillable',[\App\Http\Controllers\CrudController::class,'getoffers']);
 
 //rout parameters
 
@@ -83,13 +99,21 @@ route::namespace('Front')->group(function(){
 route::prefix('users')->group(function(){
 
     route::get('show',[UserController::class,'showUserName']);
+
+});
+
+route::group(['prefix' => 'offers'],function(){
+    route::get('store',[CrudController::class,'store']);
+    route::get('update',[CrudController::class,'update']);
+    route::get('create',[CrudController::class,'create']);
+    route::post('save',[CrudController::class,'save']) -> name('offer.save');
 });
 
 
 //route middleware
 
 route::get('check',function(){
-   return 'middleware';
+    return 'middleware';
 })->middleware('auth');
 
 
@@ -101,6 +125,8 @@ route::group(['prefix'=>'users','namespace'=>'Front','middleware'=>'auth'],funct
 });
 
 
+
+
 //
 
 
@@ -110,7 +136,7 @@ route::group(['namespace'=>'Admin','middleware'=>'auth'],function(){
 
 
 route::get('login',function(){
-   return "please login to reach this url";
+    return "please login to reach this url";
 }) -> name('login');
 
 

@@ -67,7 +67,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +81,13 @@ return [
     |
     */
 
-    'locale' => 'ar',
+    'locale' => 'en',
+
+    //localization set available laguages
+    'available_locales' => [
+        'English' => 'en',
+        'Arabic' => 'ar',
+        ],
 
     /*
     |--------------------------------------------------------------------------

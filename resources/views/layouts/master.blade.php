@@ -15,6 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{URL::asset('css/styles.css')}}" rel="stylesheet" />
+    <!-- CSS only -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> --}}
 </head>
 <body id="page-top">
 
@@ -22,13 +26,14 @@
 
 @yield('about')
 @yield('content')
+@yield('offers.create')
 
-@include('includes.footer')
+{{-- @include('includes.footer') --}}
 
 <!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
+{{-- <div class="copyright py-4 text-center text-white">
     <div class="container"><small>Copyright &copy; Your Website 2022</small></div>
-</div>
+</div> --}}
 <!-- Portfolio Modals-->
 <!-- Portfolio Modal 1-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
